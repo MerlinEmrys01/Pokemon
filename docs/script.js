@@ -1,25 +1,24 @@
-// Set the dimensions and margins of the graph
+// tried to match file format with other provided code
+
+//graphs the strongest Pokemons' total strength by Pokemon type
+
 const margin1 = {top: 20, right: 30, bottom: 50, left: 120},
     width1 = 960 - margin1.left - margin1.right,
     height1 = 600 - margin1.top - margin1.bottom;
 
-// Append the SVG object to the body of the page
 const svg1 = d3.select("#chart1")
     .attr("width", width1 + margin1.left + margin1.right)
     .attr("height", height1 + margin1.top + margin1.bottom)
-  .append("g")
+    .append("g")
     .attr("transform", `translate(${margin1.left},${margin1.top})`);
 
-// Tooltip
 const tooltip1 = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-// Parse the Data
 d3.csv("strongest_pokemon.csv").then(data => {
-  data.forEach((d, i) => d.index = i); // Add index for each data point
+  data.forEach((d, i) => d.index = i);
 
-  // Add X axis
   const x1 = d3.scaleLinear()
     .domain([0, d3.max(data, d => d.Total)])
     .range([0, width1]);
@@ -29,7 +28,6 @@ d3.csv("strongest_pokemon.csv").then(data => {
     .selectAll("text")
     .attr("class", "axis-label");
 
-  // X axis label
   svg1.append("text")
     .attr("class", "axis-label")
     .attr("text-anchor", "end")
@@ -37,7 +35,6 @@ d3.csv("strongest_pokemon.csv").then(data => {
     .attr("y", height1 + margin1.bottom - 10)
     .text("Total Strengths");
 
-  // Y axis
   const y1 = d3.scaleBand()
     .range([0, height1])
     .domain(data.map(d => d['Type 1']))
@@ -48,7 +45,6 @@ d3.csv("strongest_pokemon.csv").then(data => {
     .selectAll("text")
     .attr("class", "axis-label");
 
-  // Y axis label
   svg1.append("text")
     .attr("class", "axis-label")
     .attr("text-anchor", "end")
@@ -57,7 +53,7 @@ d3.csv("strongest_pokemon.csv").then(data => {
     .attr("transform", "rotate(-90)")
     .text("Pokemon Type 1");
 
-  // Drag behavior
+  // code for drag interactive plot
   const drag = d3.drag()
     .on("start", function(event, d) {
       d3.select(this).raise().attr("stroke", "black");
@@ -82,7 +78,6 @@ d3.csv("strongest_pokemon.csv").then(data => {
       d3.select(this).attr("stroke", null);
     });
 
-  // Bars
   svg1.selectAll("myRect")
     .data(data)
     .enter()

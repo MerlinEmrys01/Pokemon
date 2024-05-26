@@ -1,25 +1,23 @@
-// Set the dimensions and margins of the graph
+// same idea as the first graph, but now includes all Pokemons instead of just the strongest ones
+// graphs Pokemon type by count in the total dataset
+
 const margin2 = {top: 20, right: 30, bottom: 50, left: 120},
     width2 = 960 - margin2.left - margin2.right,
     height2 = 600 - margin2.top - margin2.bottom;
 
-// Append the SVG object to the body of the page
 const svg2 = d3.select("#chart2")
     .attr("width", width2 + margin2.left + margin2.right)
     .attr("height", height2 + margin2.top + margin2.bottom)
   .append("g")
     .attr("transform", `translate(${margin2.left},${margin2.top})`);
 
-// Tooltip
 const tooltip2 = d3.select("body").append("div")
     .attr("class", "tooltip")
     .style("opacity", 0);
 
-// Parse the Data
 d3.csv("Pokemon.csv").then(data => {
-  data.forEach((d, i) => d.index = i); // Add index for each data point
+  data.forEach((d, i) => d.index = i);
 
-  // Process the data to count the number of Pokémon per Type 1
   const typeCounts = d3.rollup(
     data,
     v => v.length,
@@ -28,12 +26,10 @@ d3.csv("Pokemon.csv").then(data => {
 
   const formattedData = Array.from(typeCounts, ([type, count]) => ({ type, count }));
 
-  // Sort the data by count in descending order
   formattedData.sort((a, b) => d3.descending(a.count, b.count));
 
-  console.log(formattedData); // Check the processed data
+  console.log(formattedData); 
 
-  // Add X axis
   const x2 = d3.scaleLinear()
     .domain([0, d3.max(formattedData, d => d.count)])
     .range([0, width2]);
@@ -43,7 +39,6 @@ d3.csv("Pokemon.csv").then(data => {
     .selectAll("text")
     .attr("class", "axis-label");
 
-  // X axis label
   svg2.append("text")
     .attr("class", "axis-label")
     .attr("text-anchor", "end")
@@ -51,7 +46,6 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("y", height2 + margin2.bottom - 10)
     .text("Count");
 
-  // Y axis
   const y2 = d3.scaleBand()
     .range([0, height2])
     .domain(formattedData.map(d => d.type))
@@ -62,7 +56,6 @@ d3.csv("Pokemon.csv").then(data => {
     .selectAll("text")
     .attr("class", "axis-label");
 
-  // Y axis label
   svg2.append("text")
     .attr("class", "axis-label")
     .attr("text-anchor", "end")
@@ -71,7 +64,7 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("transform", "rotate(-90)")
     .text("Pokemon Type 1");
 
-  // Drag behavior
+  // code for drag interactive plot
   const drag = d3.drag()
     .on("start", function(event, d) {
       d3.select(this).raise().attr("stroke", "black");
@@ -96,7 +89,6 @@ d3.csv("Pokemon.csv").then(data => {
       d3.select(this).attr("stroke", null);
     });
 
-  // Bars
   svg2.selectAll("myRect")
     .data(formattedData)
     .enter()
