@@ -1,7 +1,6 @@
-const margin = { top: 50, right: 50, bottom: 80, left: 70 }; // Adjusted margins
-
+const margin = { top: 50, right: 50, bottom: 120, left: 70 }; // Adjusted bottom margin
 const width = 1000 - margin.left - margin.right; // Adjusted width
-const height = 800 - margin.top - margin.bottom; // Adjusted height
+const height = 600 - margin.top - margin.bottom; // Adjusted height
 
 // Append an SVG element to the body with adjusted dimensions and margins
 const svg = d3.select("#chart5")
@@ -82,13 +81,13 @@ d3.csv("Pokemon.csv").then(function(data) {
     .attr("y", -margin.left + 20) // Adjusted position
     .style("text-anchor", "middle")
     .text("Average Total Strength");
-
   // Add x-axis label
   svg.append("text")
     .attr("x", width / 2)
-    .attr("y", height + margin.bottom + 0.1) // Adjusted position
+    .attr("y", height + margin.top + 30) // Adjusted position
     .style("text-anchor", "middle")
     .text("Type Combinations");
+
 
   // Add chart title
   svg.append("text")
