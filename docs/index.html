@@ -4,22 +4,46 @@
     <meta charset="UTF-8">
     <title>Pokémon Visualizations</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <style>
+        @font-face {
+            font-family: 'Futile Pro';
+            src: url('FutilePro.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        body {
+            font-family: 'Futile Pro', cursive; /* Apply the custom font to the body */
+            font-size: 25px;
+            background-image: url('back.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            color:  rgb(237, 154, 109);
+            -webkit-background-clip: text; /* Clip background to text */
+            background-clip: text; /* Clip background to text for non-webkit browsers */
+        }
+
         .axis-label {
-            font-size: 12px;
-            font-family: Arial, sans-serif;
+            font-size: 15px;
+            font-family: 'Arial', sans-serif;
+            margin-right: 10px;
         }
-        .bar {
-            fill: steelblue;
-        }
+
         .bar:hover {
-            fill: orange;
+            fill: rgb(155, 39, 130);
         }
+
         svg {
             display: block;
             margin: 20px auto;
         }
+
         .tooltip {
             position: absolute;
             text-align: center;
@@ -32,22 +56,90 @@
             border-radius: 8px;
             pointer-events: none;
         }
+
+        .description, .graph-container {
+            background-color:  rgb(31, 10, 31,0.95); /* More solid background color */
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 10px;
+            border: 2px solid #f2dbdb; /* Solid black border */
+            box-shadow: 0 4px 8px rgba(224, 160, 160, 0.2); /* Adds shadow for better visibility */
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 50px;
+            background-image: linear-gradient(to right, rgb(193, 143, 255), rgb(46, 26, 71));
+            -webkit-background-clip: text;
+            color: transparent;
+            text-decoration: underline;
+            background-size: 100% 200%;
+            background-position: 0 0;
+            transition: background-position 0.5s ease;
+        }
+
+        .grow {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            font-size: 50px;
+            color: #fff;
+            text-align: center;
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        .grow2 {
+            display: flex;
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            font-size: 50px;
+            color: #fff;
+            text-align: center;
+            animation: glow2 1s ease-in-out infinite alternate;
+        }
+
+        @-webkit-keyframes glow {
+            from {
+                text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+            }
+            to {
+                text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+            }
+        }
+
+        @-webkit-keyframes glow2 {
+    from {
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e5e500, 0 0 40px #e5e500, 0 0 50px #e5e500, 0 0 60px #e5e500, 0 0 70px #e5e500;
+    }
+    to {
+        text-shadow: 0 0 20px #fff, 0 0 30px #ff9f00, 0 0 40px #ff9f00, 0 0 50px #ff9f00, 0 0 60px #ff9f00, 0 0 70px #ff9f00, 0 0 80px #ff9f00;
+    }
+}
+
+        
     </style>
 </head>
 <body>
-  <div class="description">
-    <p>Pokémon are a group of pokemon with special abilities from the Nintendo-developed game Pokémon. They are named so because in the game players can catch wild Pokémon with their Pokeballs. The game has been in development for over 20 years now and there are over 1,000 Pokémon species in the game now created. While this sounds very cool, so many Pokémon can be hard for new players to memorize and make sense of their relationships. So as big fans of Pokémon, we created this Pokémon Primer website to teach new players the types of Pokémon, the distribution and role of their attributes, and the usefulness of various values in actual Pokémon battles. We hope that after browsing our website, you will have some understanding of Pokémon and become interested in playing the game!</p>
-  </div>
-    <h1>Strongest Pokémon by Type</h1>
-    <svg id="chart1" width="960" height="600"></svg>
-  <div class="description">
-    <p>This visualization represents the strongest Pokémon of each type in the "Type 1" based on their total stats. The data is derived from a dataset containing information about various Pokémon, including their types and total stats. The bars indicate the total stats of the strongest Pokémon for each type, and the labels below the bars show the names of these Pokémon.</p>
-  </div>
-    
-    <h1>Pokémon Count by Type</h1>
-    <svg id="chart2" width="960" height="600"></svg>
+  <div class="grow2">Pokémon GETTO DAZE !</div>
     <div class="description">
-      <p>This visualization represents the count of the Pokémon for each type in the "Type 1" column. The data is derived from a dataset containing information about various Pokémon, including their types and total stats. The bars indicate the total stats of the strongest Pokémon for each type, and the labels below the bars show the names of these Pokémon.</p>
+        <p>Pokémon are a group of pokemon with special abilities from the Nintendo-developed game Pokémon. They are named so because in the game players can catch wild Pokémon with their Pokeballs. The game has been in development for over 20 years now and there are over 1,000 Pokémon species in the game now created. While this sounds very cool, so many Pokémon can be hard for new players to memorize and make sense of their relationships. So as big fans of Pokémon, we created this Pokémon Primer website to teach new players the types of Pokémon, the distribution and role of their attributes, and the usefulness of various values in actual Pokémon battles. We hope that after browsing our website, you will have some understanding of Pokémon and become interested in playing the game!</p>
+    </div>
+    
+    <div class="grow">Strongest Pokémon by Type</div>
+    <div class="graph-container">
+        <svg id="chart1" width="960" height="600"></svg>
+    </div>
+    <div class="description">
+        <p>This visualization represents the strongest Pokémon of each type in the "Type 1" based on their total stats. The data is derived from a dataset containing information about various Pokémon, including their types and total stats. The bars indicate the total stats of the strongest Pokémon for each type, and the labels below the bars show the names of these Pokémon.</p>
+    </div>
+
+    <div class="grow">Pokémon Count by Type</div>
+    <div class="graph-container">
+        <svg id="chart2" width="960" height="600"></svg>
+    </div>
+    <div class="description">
+        <p>This visualization represents the count of the Pokémon for each type in the "Type 1" column. The data is derived from a dataset containing information about various Pokémon, including their types and total stats. The bars indicate the total stats of the strongest Pokémon for each type, and the labels below the bars show the names of these Pokémon.</p>
     </div>
 
     <script src="https://d3js.org/d3.v6.min.js"></script>
@@ -56,22 +148,3 @@
 </body>
 </html>
 
-
-
-<!-- <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="assets/styles/normalize.css" />
-    <link rel="stylesheet" href="assets/styles/font.css" />
-    <link rel="stylesheet" href="assets/styles/katex.css" />
-    <link rel="stylesheet" href="assets/styles/global.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Svelte</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
-</html> -->
