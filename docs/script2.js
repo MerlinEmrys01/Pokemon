@@ -47,7 +47,7 @@ d3.csv("Pokemon.csv").then(data => {
         .range([0, height2])
         .domain(formattedData.map(d => d.type))
         .padding(0.1);
-        .padding(0.1);
+        
     svg2.append("g")
         .attr("class", "y-axis")
         .call(d3.axisLeft(y2))

@@ -1,6 +1,6 @@
-const margin4 = { top: 20, right: 30, bottom: 80, left: 120 },
-  width4 = 960 - margin4.left - margin4.right,
-  height4 = 600 - margin4.top - margin4.bottom;
+const margin4 = { top: 20, right: 30, bottom: 70, left: 120 }, // Increase bottom margin
+    width4 = 960 - margin4.left - margin4.right,
+    height4 = 800 - margin4.top - margin4.bottom;
 
 const svg4 = d3.select("#chart4")
   .attr("width", width4 + margin4.left + margin4.right)
@@ -12,7 +12,7 @@ const tooltip4 = d3.select("body").append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+const colorScale1= d3.scaleOrdinal(d3.schemeCategory10);
 
 d3.csv("Pokemon.csv").then(data => {
   const dualTypeData = data.filter(d => d['Type 1'] && d['Type 2']);
@@ -56,7 +56,7 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("y", d => y4(d.count))
     .attr("width", x4.bandwidth())
     .attr("height", d => height4 - y4(d.count))
-    .attr("fill", d => colorScale(d.typeCombo))
+    .attr("fill", d => colorScale1(d.typeCombo))
     .on("mouseover", function(event, d) {
       tooltip4.transition()
         .duration(200)
@@ -70,7 +70,7 @@ d3.csv("Pokemon.csv").then(data => {
       tooltip4.transition()
         .duration(500)
         .style("opacity", 0);
-      d3.select(this).attr("fill", colorScale(d.typeCombo));
+      d3.select(this).attr("fill", colorScale1(d.typeCombo));
     })
     .on("click", function(event, d) {
       alert(`You clicked on ${d.typeCombo} with ${d.count} Pokémon!`);
