@@ -82,6 +82,16 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("height", d => height4 - y4(d.count))
     .delay((d, i) => i * 50);
 
+
+  // svg4.selectAll(".label")
+  //   .data(top15)
+  //   .enter()
+  //   .append("text")
+  //   .attr("class", "label")
+  //   .attr("x", d => x4(d.typeCombo) + x4.bandwidth() / 2)
+  //   .attr("y", d => y4(d.count) - 5)
+  //   .attr("text-anchor", "middle")
+  //   .text(d => d.count);
   svg4.selectAll(".label")
     .data(top15)
     .enter()
@@ -90,5 +100,7 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("x", d => x4(d.typeCombo) + x4.bandwidth() / 2)
     .attr("y", d => y4(d.count) - 5)
     .attr("text-anchor", "middle")
+    .attr("fill", "white") // Set the fill color to white
     .text(d => d.count);
+
 });

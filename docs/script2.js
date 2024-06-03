@@ -117,6 +117,8 @@ d3.csv("Pokemon.csv").then(data => {
         .attr("class", "bar")
         .attr("fill", (d, i) => {
             // Example: Assigning different colors based on index
+    svg2.selectAll(".axis-label")
+        .style("fill", "white");
             
 const colors = [
     "#05A8D9", "#9FA19F","#3FA129", "#91A119","#EF4179",  "#E62829", "#FAC000",   "#AFA981",  "#915121", "#704170", "#5060E1",     "#624D4E", "#9141CB"   , "#B16232","#60A1B8","#3DCEF3",   "#EF70EF",   "#81B9EF"

@@ -120,6 +120,7 @@ d3.csv("strongest_pokemon.csv").then(data => {
                 })
                 .raise(); // Ensure the icon is on top
         });
+
     
 
     
@@ -175,4 +176,9 @@ svg1.selectAll("myRect")
     .attr("width", 40)
     .attr("height", 40)
     .attr("class", "icon");// Adjust the height of the icon
+
+    svg1.selectAll(".axis-label")
+    .style("fill", "white");
+
 });
+

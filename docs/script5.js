@@ -75,18 +75,23 @@ d3.csv("Pokemon.csv").then(function(data) {
     .call(d3.axisLeft(yScale));
 
   // Add y-axis label
-  svg.append("text")
-    .attr("transform", "rotate(-90)")
-    .attr("x", -height / 2)
-    .attr("y", -margin.left + 20) // Adjusted position
-    .style("text-anchor", "middle")
-    .text("Average Total Strength");
-  // Add x-axis label
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", height + margin.top + 30) // Adjusted position
-    .style("text-anchor", "middle")
-    .text("Type Combinations");
+  // Add y-axis label
+svg.append("text")
+  .attr("transform", "rotate(-90)")
+  .attr("x", -height / 2)
+  .attr("y", -margin.left + 20) // Adjusted position
+  .style("text-anchor", "middle")
+  .style("fill", "white") // Set fill color to white
+  .text("Average Total Strength");
+
+// Add x-axis label
+svg.append("text")
+  .attr("x", width / 2)
+  .attr("y", height + margin.top + 30) // Adjusted position
+  .style("text-anchor", "middle")
+  .style("fill", "white") // Set fill color to white
+  .text("Type Combinations");
+
 
 
   // Add chart title
@@ -94,6 +99,7 @@ d3.csv("Pokemon.csv").then(function(data) {
     .attr("x", width / 2)
     .attr("y", -margin.top / 2) // Adjusted position
     .style("text-anchor", "middle")
+    .style("fill", "white")
     .style("font-size", "20px")
     .text("Top 15 Average Total Strength by Type Combinations");
 });
