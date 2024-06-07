@@ -91,7 +91,7 @@ d3.csv("Pokemon.csv").then(data => {
             const boundedY = Math.max(0, Math.min(height2 - y2.bandwidth(), yPosition));
             const index = Math.floor(boundedY / y2.step());
 
-            // Check if the dragged bar is swapping places with another bar
+  
             if (index !== d.index) {
                 const targetIndex = Math.max(0, Math.min(formattedData.length - 1, index));
                 const draggedBar = formattedData[d.index];
@@ -143,9 +143,9 @@ d3.csv("Pokemon.csv").then(data => {
         .attr("width", d => x2(d.count))
         .attr("height", y2.bandwidth())
         .attr("class", "bar")
-        .attr("fill", d => colorMap[d.type] || "#888888") // Default color if type not found in colorMap
-        .attr("rx", 12) // Adjust the corner radius for the x-axis
-        .attr("ry", 12) // Adjust the corner radius for the y-axis
+        .attr("fill", d => colorMap[d.type] || "#888888") 
+        .attr("rx", 12) 
+        .attr("ry", 12) 
         .call(drag)
         .on("mouseover", function(event, d) {
             tooltip2.transition()
@@ -165,9 +165,9 @@ d3.csv("Pokemon.csv").then(data => {
         .data(formattedData)
         .enter()
         .append("image")
-        .attr("xlink:href", d => `${d.type}.png`) // Assuming the icons are named the same as the bars
-        .attr("x", d => x2(d.count) - 20) // Adjusted position to place the icon near the end of the bar
-        .attr("y", d => y2(d.type) + y2.bandwidth() / 2 - 20) // Position the icon in the middle of the bar
+        .attr("xlink:href", d => `${d.type}.png`) 
+        .attr("x", d => x2(d.count) - 20) 
+        .attr("y", d => y2(d.type) + y2.bandwidth() / 2 - 20) 
         .attr("width", 40)
         .attr("height", 40)
         .attr("class", "icon");

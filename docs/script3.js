@@ -60,14 +60,14 @@ d3.csv("Pokemon.csv").then(data => {
   arcs.append("text")
     .attr("transform", d => `translate(${arc.centroid(d)})`)
     .attr("text-anchor", "middle")
-    .attr("dy", "-0.35em") // Positioning the label above the percentage
-    .style("font-size", "20px") // Set font size
+    .attr("dy", "-0.35em") 
+    .style("font-size", "20px") 
     .text(d => `${d.data.type}`);
 
   arcs.append("text")
     .attr("transform", d => `translate(${arc.centroid(d)})`)
     .attr("text-anchor", "middle")
-    .attr("dy", "0.85em") // Positioning the percentage below the label
-    .style("font-size", "40px") // Set font size
+    .attr("dy", "0.85em") 
+    .style("font-size", "40px") 
     .text(d => `${(d.data.count / total * 100).toFixed(2)}%`);
 });

@@ -1,4 +1,4 @@
-const margin4 = { top: 80, right: 30, bottom: 160, left: 120 }, // Increase bottom margin
+const margin4 = { top: 80, right: 30, bottom: 160, left: 120 }, 
     width4 = 960 - margin4.left - margin4.right,
     height4 = 800 - margin4.top - margin4.bottom;
 
@@ -12,7 +12,7 @@ const tooltip4 = d3.select("body").append("div")
   .attr("class", "tooltip")
   .style("opacity", 0);
 
-// Define a color map for the primary types
+
 const colorMap = {
   "Grass": "#78C850",
   "Fire": "#F08030",
@@ -63,7 +63,7 @@ d3.csv("Pokemon.csv").then(data => {
     .selectAll("text")
     .attr("transform", "rotate(-45)")
     .style("text-anchor", "end")
-    .attr("dy", "1.5em"); // Adjust the dy attribute to add padding
+    .attr("dy", "1.5em"); 
 
   svg4.append("g")
     .call(d3.axisLeft(y4));
@@ -78,7 +78,7 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("height", d => height4 - y4(d.count))
     .attr("fill", d => {
       const primaryType = d.typeCombo.split(' & ')[0];
-      return colorMap[primaryType] || "#56949f"; // Default color if type not found
+      return colorMap[primaryType] || "#56949f"; 
     })
     .on("mouseover", function(event, d) {
       tooltip4.transition()
@@ -95,7 +95,7 @@ d3.csv("Pokemon.csv").then(data => {
         .style("opacity", 0);
       d3.select(this).attr("fill", d => {
         const primaryType = d.typeCombo.split(' & ')[0];
-        return colorMap[primaryType] || "#56949f"; // Default color if type not found
+        return colorMap[primaryType] || "#56949f"; 
       });
     })
     .on("click", function(event, d) {
@@ -116,30 +116,27 @@ d3.csv("Pokemon.csv").then(data => {
     .attr("x", d => x4(d.typeCombo) + x4.bandwidth() / 2)
     .attr("y", d => y4(d.count) - 5)
     .attr("text-anchor", "middle")
-    .attr("fill", "white") // Set the fill color to white
+    .attr("fill", "white") 
     .text(d => d.count);
 
-  // Add y-axis label
   svg4.append("text")
     .attr("transform", "rotate(-90)")
     .attr("x", -height4 / 2)
-    .attr("y", -margin4.left + 40) // Adjusted position
+    .attr("y", -margin4.left + 40) 
     .style("text-anchor", "middle")
-    .style("fill", "white") // Set fill color to white
+    .style("fill", "white") 
     .text("Count");
 
-  // Add x-axis label
   svg4.append("text")
     .attr("x", width4 / 2)
-    .attr("y", height4 + margin4.bottom - 30) // Adjusted position
+    .attr("y", height4 + margin4.bottom - 30) 
     .style("text-anchor", "middle")
-    .style("fill", "white") // Set fill color to white
+    .style("fill", "white") 
     .text("Type Combinations");
 
-  // Add chart title
   svg4.append("text")
     .attr("x", width4 / 2)
-    .attr("y", -margin4.top / 2) // Adjusted position
+    .attr("y", -margin4.top / 2) 
     .style("text-anchor", "middle")
     .style("fill", "white")
     .style("font-size", "20px")

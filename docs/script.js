@@ -1,9 +1,9 @@
 // tried to match file format with other provided code
 
 // graphs the strongest Pokemons' total strength by Pokemon type
-const margin1 = { top: 20, right: 30, bottom: 70, left: 120 }, // Increase bottom margin
+const margin1 = { top: 20, right: 30, bottom: 70, left: 120 },
     width1 = 960 - margin1.left - margin1.right,
-    height1 = 800 - margin1.top - margin1.bottom; // Increase the total height
+    height1 = 800 - margin1.top - margin1.bottom;
 
 const svg1 = d3.select("#chart1")
     .attr("width", width1 + margin1.left + margin1.right)
@@ -14,15 +14,6 @@ const svg1 = d3.select("#chart1")
 
     const colorScale = d3.scaleOrdinal()
     .range(["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b", "#e377c2", "#7f7f7f", "#bcbd22", "#17becf"]);
-// Create an empty object to store icon paths
-// const iconPaths = {};
-
-// // Generate icon paths for each unique Type 1 variable
-// data.forEach(d => {
-//     const type1Variable = d['Type 1'];
-//     iconPaths[type1Variable] = type1Variable + '.png';
-// });
-
 
 
 const tooltip1 = d3.select("body").append("div")
@@ -33,13 +24,12 @@ d3.csv("strongest_pokemon.csv").then(data => {
     data.forEach((d, i) => d.index = i); 
     const iconPaths = {};
 
-// Generate icon paths for each unique Type 1 variable
     data.forEach(d => {
     const type1Variable = d['Type 1'];
     iconPaths[type1Variable] = type1Variable + '.png';
 });
     data.forEach(d => {
-    d.iconPath = iconPaths[d['Type 1']] || 'default/icon.png'; // Use default icon path if not found
+    d.iconPath = iconPaths[d['Type 1']] || 'default/icon.png';
 });
 
     const x1 = d3.scaleLinear()
@@ -86,15 +76,15 @@ d3.csv("strongest_pokemon.csv").then(data => {
             const centerY = yPosition + y1.bandwidth() / 2;
             d3.select(this).attr("y", yPosition);
     
-            // Update the position of the corresponding icon
+           
             const bar = d3.select(this);
             const icon = svg1.selectAll(".icon")
                 .filter(function(e) {
                     return e.index === d.index;
                 });
-            icon.raise() // Bring the icon to the front
-                .attr("x", x1(d.Total) - 20) // Adjust the position of the icon horizontally
-                .attr("y", centerY - 20); // Adjust the position of the icon vertically
+            icon.raise() 
+                .attr("x", x1(d.Total) - 20) 
+                .attr("y", centerY - 20); 
         })
         .on("end", function(event, d) {
             const yPosition = d3.pointer(event, this)[1] - margin1.top;
@@ -112,16 +102,14 @@ d3.csv("strongest_pokemon.csv").then(data => {
                 .call(d3.axisLeft(y1));
             d3.select(this).attr("stroke", null);
     
-            // Update the position of all icons after dragging ends and ensure they are on top of the bars
+           
             svg1.selectAll(".icon")
                 .attr("y", iconD => {
                     const barIndex = data.findIndex(barD => barD.index === iconD.index);
-                    return y1(data[barIndex]['Type 1']) - 20; // Adjust the position of the icon vertically
+                    return y1(data[barIndex]['Type 1']) - 20;
                 })
-                .raise(); // Ensure the icon is on top
+                .raise();
         });
-
-    
 
     
 
@@ -131,9 +119,8 @@ d3.csv("strongest_pokemon.csv").then(data => {
             "Fire": "#F08030",
             "Water": "#6890F0",
             "Bug": "#A8B820",
-            // Add more colors for other Pokémon types as needed
         };
-// Use the color scale to fill the bars
+
 svg1.selectAll("myRect")
     .data(data)
     .enter()
@@ -149,8 +136,8 @@ svg1.selectAll("myRect")
         ];
         return colors[i % colors.length];
     })
-    .attr("rx", 12) // Adjust the corner radius for the x-axis
-    .attr("ry", 12) // Adjust the corner radius for the y-axis
+    .attr("rx", 12) 
+    .attr("ry", 12) 
     .call(drag)
     .on("mouseover", function(event, d) {
         tooltip1.transition()
@@ -172,10 +159,10 @@ svg1.selectAll("myRect")
     .append("image")
     .attr("xlink:href", d => d.iconPath)
     .attr("x", d => x1(d.Total) - 20)
-    .attr("y", d => y1(d['Type 1']) + y1.bandwidth() / 2 - 20) // Position in the middle of the bar
+    .attr("y", d => y1(d['Type 1']) + y1.bandwidth() / 2 - 20)
     .attr("width", 40)
     .attr("height", 40)
-    .attr("class", "icon");// Adjust the height of the icon
+    .attr("class", "icon");
 
     svg1.selectAll(".axis-label")
     .style("fill", "white");
