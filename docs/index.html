@@ -15,7 +15,7 @@
         }
 
         body {
-            font-family: 'Futile Pro', cursive; /* Apply the custom font to the body */
+            font-family: 'Futile Pro', cursive;
             font-size: 25px;
             background-image: url('back.jpg');
             background-size: cover;
@@ -25,8 +25,8 @@
             padding: 0;
             line-height: 1.6;
             color:  rgb(237, 154, 109);
-            -webkit-background-clip: text; /* Clip background to text */
-            background-clip: text; /* Clip background to text for non-webkit browsers */
+            -webkit-background-clip: text; 
+            background-clip: text;
         }
 
         .axis-label {
@@ -58,13 +58,13 @@
         }
 
         .description, .graph-container {
-            background-color:  rgb(31, 10, 31,0.95); /* More solid background color */
+            background-color:  rgb(31, 10, 31,0.95); 
             padding: 20px;
             margin: 20px auto;
             width: 80%;
             border-radius: 10px;
-            border: 2px solid #f2dbdb; /* Solid black border */
-            box-shadow: 0 4px 8px rgba(224, 160, 160, 0.2); /* Adds shadow for better visibility */
+            border: 2px solid #f2dbdb;
+            box-shadow: 0 4px 8px rgba(224, 160, 160, 0.2);
         }
 
         h1 {
@@ -81,8 +81,8 @@
 
         .grow {
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            justify-content: center;
+            align-items: center; 
             font-size: 50px;
             color: #fff;
             text-align: center;
@@ -91,8 +91,8 @@
 
         .grow2 {
             display: flex;
-            justify-content: center; /* Center horizontally */
-            align-items: center; /* Center vertically */
+            justify-content: center; 
+            align-items: center;
             font-size: 50px;
             color: #fff;
             text-align: center;
@@ -123,12 +123,12 @@
 <body>
   <div class="grow2">Pokémon GETTO DAZE !</div>
     <div class="description">
-        <p>Pokémon is a popular franchise that originated in Japan and has since gained global recognition. Pokémon features fictional creatures called Pokémon, which come in various types, each with their own strengths and weaknesses. The Pokémon.csv dataset contains information about these creatures, including their names, primary types (Type 1), secondary types (Type 2), and various attributes such as total stats, HP, attack, defense, special attack, special defense, and speed. Additionally, it includes the generation the Pokémon belongs to and a categorical variable indicating whether the Pokémon is legendary. Pokémon.</p>
+        <p>Calling all future Pokémon masters, come and learn about how you can enhance your Pokémon team and win all the duels! Pokémon is a popular franchise that originated in Japan and has since gained global recognition. Pokémon features fictional creatures called Pokémon, which come in various types, each with their own strengths and weaknesses. The Pokémon.csv dataset contains information about these creatures, including their names, primary types (Type 1), secondary types (Type 2), and various attributes such as total stats, HP, attack, defense, special attack, special defense, and speed. Additionally, it includes the generation the Pokémon belongs to and a categorical variable indicating whether the Pokémon is legendary.</p>
     </div>
 
     <div class="grow2">What Pokemon Types are associated with Pokemon strength?</div>
     <div class="description">
-  <p>Let's begin to answer this question by seeing how each of the strongest Pokemons in each Primary type compare:</p></div>
+  <p>Whether you've been catching 'em all since day 1 or just starting your journey, there's one question that burns brighter than a Charizard's flame: What Pokémon types are associated with pokemon strength? Let's begin to answer this question by seeing how each of the strongest Pokemons in each Primary type compare:</p></div>
     
     <div class="grow">Strongest Pokémon by Type</div>
     <div class="graph-container">
@@ -166,12 +166,13 @@
         <svg id="chart5" width="960" height="600"></svg>
     </div>
     <div class="description">
-      <p>This visualization represents the top 15 strongest Pokémon type combinations measured by the "Total" column. We can see that the strongest Pokemon type combination is Ground & Fire! Interesting to see that this combination is not in the top 15 most popular type combinations.</p>
-    <p>Our observations: None of the most popular type combinations were in the strongest combinations -> popularity does not gaurantee strength
-                  With fewer than six Pokémon possessing the Ground & Fire combinations, the rankings could be skewed by exceptionally powerful pokemon
-                  11 out of the top 15 strongest combinations included the "Dragon" type, which supports the observations made in our first visualization. </p>
+        <p>From this, we can make ground-breaking and dramatic final observations and answer our original question to help you become a Pokémon master:</p>
+        <p>None of the most popular type combinations were in the strongest combinations -> popularity does not guarantee strength.</p>
+        <p>With fewer than six Pokémon possessing the Ground & Fire type combination, the rankings could be skewed by exceptionally powerful Pokémon.</p>
+        <p>11 out of the top 15 strongest combinations included the "Dragon" type, which supports the observations made in our first visualization.</p>
+        <p>What Pokémon Types are associated with Pokémon strength? Well our answer: the “dragon” type is largely correlated with a high total strength value. So to all future Pokémon masters looking to build a strong deck, make sure you check out dragon type Pokémon or Pokémon who have some combination of dragon type!</p>
+      </div>
       
-    </div>
 
    
  

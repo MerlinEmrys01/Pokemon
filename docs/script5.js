@@ -1,14 +1,36 @@
-const margin = { top: 50, right: 50, bottom: 120, left: 70 }; // Adjusted bottom margin
-const width = 1000 - margin.left - margin.right; // Adjusted width
-const height = 600 - margin.top - margin.bottom; // Adjusted height
+const margin5 = { top: 50, right: 50, bottom: 120, left: 70 }; // Adjusted bottom margin
+const width5 = 1000 - margin5.left - margin5.right; // Adjusted width
+const height5 = 600 - margin5.top - margin5.bottom; // Adjusted height
 
 // Append an SVG element to the body with adjusted dimensions and margins
-const svg = d3.select("#chart5")
+const svg5 = d3.select("#chart5")
   .append("svg")
-  .attr("width", width + margin.left + margin.right) // Adjusted width
-  .attr("height", height + margin.top + margin.bottom) // Adjusted height
+  .attr("width", width5 + margin5.left + margin5.right) // Adjusted width
+  .attr("height", height5 + margin5.top + margin5.bottom) // Adjusted height
   .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // Adjusted transform
+  .attr("transform", "translate(" + margin5.left + "," + margin5.top + ")"); // Adjusted transform
+
+// Define a color map for the primary types
+const colorMap5 = {
+  "Grass": "#78C850",
+  "Fire": "#F08030",
+  "Water": "#6890F0",
+  "Bug": "#A8B820",
+  "Normal": "#A8A878",
+  "Poison": "#A040A0",
+  "Electric": "#F8D030",
+  "Ground": "#E0C068",
+  "Fairy": "#EE99AC",
+  "Fighting": "#C03028",
+  "Psychic": "#F85888",
+  "Rock": "#B8A038",
+  "Ghost": "#705898",
+  "Ice": "#98D8D8",
+  "Dragon": "#7038F8",
+  "Dark": "#705848",
+  "Steel": "#B8B8D0",
+  "Flying": "#A890F0"
+};
 
 // Read the data from the CSV file
 d3.csv("Pokemon.csv").then(function(data) {
@@ -26,25 +48,28 @@ d3.csv("Pokemon.csv").then(function(data) {
   const top15Combinations = typeCombinationAverages.slice(0, 15);
 
   // Define x and y scales
-  const xScale = d3.scaleBand()
+  const xScale5 = d3.scaleBand()
     .domain(top15Combinations.map(d => d.typeCombination))
-    .range([0, width]) // Adjusted range
+    .range([0, width5]) // Adjusted range
     .padding(0.1);
 
-  const yScale = d3.scaleLinear()
+  const yScale5 = d3.scaleLinear()
     .domain([0, d3.max(top15Combinations, d => d.averageTotal)])
-    .range([height, 0]); // Adjusted range
+    .range([height5, 0]); // Adjusted range
 
   // Draw bars for each type combination with tooltips
-  svg.selectAll("rect")
+  svg5.selectAll("rect")
     .data(top15Combinations)
     .enter()
     .append("rect")
-    .attr("x", d => xScale(d.typeCombination))
-    .attr("y", d => yScale(d.averageTotal))
-    .attr("width", xScale.bandwidth())
-    .attr("height", d => height - yScale(d.averageTotal))
-    .attr("fill", "#56949f")
+    .attr("x", d => xScale5(d.typeCombination))
+    .attr("y", d => yScale5(d.averageTotal))
+    .attr("width", xScale5.bandwidth())
+    .attr("height", d => height5 - yScale5(d.averageTotal))
+    .attr("fill", d => {
+      const primaryType = d.typeCombination.split('-')[0];
+      return colorMap5[primaryType] || "#56949f"; // Default color if type not found
+    })
     .on("mouseover", function(event, d) {
         const tooltipHeight = 60;
         tooltip2.transition()
@@ -61,9 +86,9 @@ d3.csv("Pokemon.csv").then(function(data) {
     });
 
   // Add x-axis
-  svg.append("g")
-    .attr("transform", "translate(0," + height + ")") // Adjusted transform
-    .call(d3.axisBottom(xScale))
+  svg5.append("g")
+    .attr("transform", "translate(0," + height5 + ")") // Adjusted transform
+    .call(d3.axisBottom(xScale5))
     .selectAll("text")
     .attr("transform", "rotate(-45)")
     .style("text-anchor", "end")
@@ -71,33 +96,30 @@ d3.csv("Pokemon.csv").then(function(data) {
     .attr("dy", "0.5em");
 
   // Add y-axis
-  svg.append("g")
-    .call(d3.axisLeft(yScale));
+  svg5.append("g")
+    .call(d3.axisLeft(yScale5));
 
   // Add y-axis label
-  // Add y-axis label
-svg.append("text")
-  .attr("transform", "rotate(-90)")
-  .attr("x", -height / 2)
-  .attr("y", -margin.left + 20) // Adjusted position
-  .style("text-anchor", "middle")
-  .style("fill", "white") // Set fill color to white
-  .text("Average Total Strength");
+  svg5.append("text")
+    .attr("transform", "rotate(-90)")
+    .attr("x", -height5 / 2)
+    .attr("y", -margin5.left + 20) // Adjusted position
+    .style("text-anchor", "middle")
+    .style("fill", "white") // Set fill color to white
+    .text("Average Total Strength");
 
-// Add x-axis label
-svg.append("text")
-  .attr("x", width / 2)
-  .attr("y", height + margin.top + 30) // Adjusted position
-  .style("text-anchor", "middle")
-  .style("fill", "white") // Set fill color to white
-  .text("Type Combinations");
-
-
+  // Add x-axis label
+  svg5.append("text")
+    .attr("x", width5 / 2)
+    .attr("y", height5 + margin5.top + 60) // Adjusted position
+    .style("text-anchor", "middle")
+    .style("fill", "white") // Set fill color to white
+    .text("Type Combinations");
 
   // Add chart title
-  svg.append("text")
-    .attr("x", width / 2)
-    .attr("y", -margin.top / 2) // Adjusted position
+  svg5.append("text")
+    .attr("x", width5 / 2)
+    .attr("y", -margin5.top / 2) // Adjusted position
     .style("text-anchor", "middle")
     .style("fill", "white")
     .style("font-size", "20px")
