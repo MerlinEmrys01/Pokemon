@@ -85,13 +85,13 @@ d3.csv("Pokemon.csv").then(data => {
     const drag = d3.drag()
         .on("start", function(event, d) {
             d3.select(this).raise().attr("stroke", "black");
+            d.initialY = y2(d.type);
         })
         .on("drag", function(event, d) {
             const yPosition = d3.pointer(event, this)[1] - margin2.top;
             const boundedY = Math.max(0, Math.min(height2 - y2.bandwidth(), yPosition));
             const index = Math.floor(boundedY / y2.step());
 
-  
             if (index !== d.index) {
                 const targetIndex = Math.max(0, Math.min(formattedData.length - 1, index));
                 const draggedBar = formattedData[d.index];
@@ -115,6 +115,10 @@ d3.csv("Pokemon.csv").then(data => {
             d3.select(this).attr("y", y2(d.type));
         })
         .on("end", function(event, d) {
+            const finalY = y2(d.type);
+            if (d.initialY === finalY) {
+                d3.select(this).attr("y", y2(d.type)); 
+            }
             y2.domain(formattedData.map(d => d.type));
 
             svg2.selectAll("rect")
@@ -129,7 +133,7 @@ d3.csv("Pokemon.csv").then(data => {
             svg2.selectAll(".icon")
                 .attr("x", d => x2(d.count) - 20)
                 .attr("y", d => y2(d.type) + y2.bandwidth() / 2 - 20)
-                .raise(); // Ensure the icon is on top
+                .raise();
 
             d3.select(this).attr("stroke", null);
         });
@@ -174,4 +178,12 @@ d3.csv("Pokemon.csv").then(data => {
 
     svg2.selectAll(".axis-label")
         .style("fill", "white");
+
+    svg2.selectAll(".bar").on("click", function(event, d) {
+        event.stopPropagation();
+    });
+
+    svg2.selectAll(".icon").on("click", function(event, d) {
+        event.stopPropagation();
+    });
 });
